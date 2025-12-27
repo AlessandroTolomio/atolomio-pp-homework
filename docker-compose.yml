@@ -1,0 +1,18 @@
+services:
+  app:
+    build: ./app
+    ports:
+      - "3001:3001"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/async-pdf-generator
+    volumes:
+      - ./app:/app
+      - ./pdfs:/app/pdfs
+      - /app/node_modules
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"

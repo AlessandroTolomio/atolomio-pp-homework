@@ -1,0 +1,15 @@
+# Node.js
+node_modules/
+*.log
+.env
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Generated files
+pdfs/
+
+# IDE
+.vscode/
+.idea/
