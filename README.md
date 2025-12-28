@@ -31,8 +31,7 @@ Implementata una pagina web che permette all'utente di inserire multiple stringh
 **Implementazione:** Algoritmo iterativo che rimuove solo le parentesi esterne bilanciate, preservando quelle interne o non bilanciate.
 
 #### 1.2 Pagina Pairs-EN (`/pairs-en`) - Bonus Point
-Implementata la funzionalità bonus per rimuovere coppie di lettere inglesi esterne corrispondenti secondo la mappatura:
-`a-z, b-y, c-x, d-w, e-v, f-u, g-t, h-s, i-r, j-q, k-p, l-o, m-n`
+Implementata la funzionalità bonus per rimuovere coppie di lettere inglesi esterne.
 
 **Implementazione:** Algoritmo iterativo che utilizza una mappa per le coppie di lettere, garantendo performance ottimali con lookup O(1). Un'alternativa con regex sarebbe stata possibile ma meno performante.
 
@@ -123,7 +122,7 @@ docker-compose down
 - `GET /api/debug/jobs` - Tutti i job con tempi di elaborazione
 - `GET /health` - Health check
 
-## 🔧 Test e Validazione
+## 🔧 Test e Validazione (nice to have)
 
 - **Test automatici:** Implementazione di test unitari per validare le funzioni di pulizia stringhe e generazione spirale (nice to have per garantire robustezza del codice)
 
