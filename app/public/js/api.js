@@ -1,5 +1,5 @@
 /**
- * API Communication Module for Async PDF Generator
+ * API Communication Module for Async PDF Generation
  * Handles all HTTP communication with the backend API
  */
 
@@ -129,11 +129,6 @@ export function getDownloadURL(jobId) {
 
     return `${API_BASE_URL}/download/${encodeURIComponent(jobId.trim())}`;
 }
-
-/**
- * Download a PDF file (this will trigger browser download or return error)
- * Note: This function is not currently used but kept for potential future use
- */
 
 /**
  * Utility function to handle API errors in UI
