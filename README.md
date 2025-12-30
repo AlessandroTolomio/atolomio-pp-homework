@@ -83,7 +83,6 @@ L'applicazione utilizza un'architettura containerizzata con:
 │   │   └── favicon.svg            # Icona del sito
 │   ├── services/                  # Servizi backend
 │   │   ├── index.js               # Esportazione centralizzata servizi
-│   │   ├── pdfGenerator.js        # Generatore PDF sincrono
 │   │   ├── pdfWorker.js           # Generazione PDF con Worker Threads
 │   │   ├── queueProcessor.js      # Gestione coda job
 │   │   └── spiralGenerator.js     # Generatore layout a spirale
