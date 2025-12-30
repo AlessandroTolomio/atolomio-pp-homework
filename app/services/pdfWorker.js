@@ -98,15 +98,9 @@ if (isMainThread) {
   try {
     const filePath = path.join(pdfStorageDir, filename);
 
-    // Check if content contains commas (spiral mode)
-    const isSpiral = content.includes(',');
-    let processedContent = content;
-    
-    if (isSpiral) {
-      // Generate spiral layout from comma-separated words
-      processedContent = SpiralGenerator.generateSpiral(content);
-      console.log('Generated spiral layout for PDF');
-    }
+    // Generate spiral layout for PDF content
+    const processedContent = SpiralGenerator.generateSpiral(content);
+    console.log('Generated spiral layout for PDF');
 
     // Create a new PDF document
     const doc = new PDFDocument();
@@ -115,13 +109,13 @@ if (isMainThread) {
     const stream = fs.createWriteStream(filePath);
     doc.pipe(stream);
 
-    // Add content to the PDF with monospace font
+    // Add content to the PDF with monospace font (spiral layout)
     doc.font('Courier')
-       .fontSize(isSpiral ? 8 : 10) // Smaller font for spiral to fit better
+       .fontSize(8) // Smaller font for spiral to fit better
        .text(processedContent, 50, 50, {
          width: 500,
-         align: isSpiral ? 'center' : 'left',
-         lineGap: isSpiral ? 1 : 2
+         align: 'center',
+         lineGap: 1
        });
 
     // Finalize the PDF
