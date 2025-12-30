@@ -69,44 +69,46 @@ L'applicazione utilizza un'architettura containerizzata con:
 
 ```
 .
-├── app/                       # Applicazione Node.js
-│   ├── public/                # File statici HTML/CSS/JS
-│   │   ├── js/                # Moduli JavaScript frontend
-│   │   │   ├── api.js         # Layer di comunicazione API
-│   │   │   ├── brackets.js    # Modulo normalizzatore brackets
-│   │   │   ├── pairs-en.js    # Modulo normalizzatore coppie inglesi
-│   │   │   └── pdf-utils.js   # Utilità per gestione PDF
-│   │   ├── index.html         # Pagina iniziale con riferimenti alle pagine di normalizzazione
-│   │   ├── brackets.html      # Pagina normalizzatore brackets
-│   │   ├── pairs-en.html      # Pagina normalizzatore Pairs-EN
-│   │   └── favicon.svg        # Icona del sito
-│   ├── services/              # Servizi backend
-│   │   ├── index.js           # Esportazione centralizzata servizi
-│   │   ├── pdfGenerator.js    # Generatore PDF sincrono
-│   │   ├── pdfWorker.js       # Generazione PDF con Worker Threads
-│   │   ├── queueProcessor.js  # Gestione coda job
-│   │   └── spiralGenerator.js # Generatore layout a spirale
-│   ├── models/                # Modelli database
-│   │   ├── index.js           # Esportazione centralizzata modelli
-│   │   └── PDFJob.js          # Modello job PDF
-│   ├── routes/                # Route API Express
-│   ├── config/                # File di configurazione
-│   │   └── database.js        # Configurazione MongoDB
-│   ├── pdfs/                  # Storage locale PDF generati
-│   ├── .dockerignore          # File ignorati da Docker
-│   ├── Dockerfile             # Configurazione container
-│   ├── package.json           # Dipendenze Node.js
-│   └── server.js              # Server Express principale
-├── pdfs/                      # Storage esterno PDF generati
-├── docker-compose.yml         # Orchestrazione Docker Compose
-├── .gitignore                 # File ignorati da Git
-└── README.md                  # Questo file
+├── app/                           # Applicazione Node.js
+│   ├── public/                    # File statici HTML/CSS/JS
+│   │   ├── js/                    # Moduli JavaScript frontend
+│   │   │   ├── api.js             # Layer di comunicazione API
+│   │   │   ├── brackets.js        # Modulo normalizzatore brackets
+│   │   │   ├── pairs-en.js        # Modulo normalizzatore coppie inglesi
+│   │   │   ├── normalize-utils.js # Utilità condivise per normalizzazione
+│   │   │   └── pdf-utils.js       # Utilità per gestione PDF
+│   │   ├── index.html             # Pagina iniziale con riferimenti alle pagine di normalizzazione
+│   │   ├── brackets.html          # Pagina normalizzatore brackets
+│   │   ├── pairs-en.html          # Pagina normalizzatore Pairs-EN
+│   │   └── favicon.svg            # Icona del sito
+│   ├── services/                  # Servizi backend
+│   │   ├── index.js               # Esportazione centralizzata servizi
+│   │   ├── pdfGenerator.js        # Generatore PDF sincrono
+│   │   ├── pdfWorker.js           # Generazione PDF con Worker Threads
+│   │   ├── queueProcessor.js      # Gestione coda job
+│   │   └── spiralGenerator.js     # Generatore layout a spirale
+│   ├── models/                    # Modelli database
+│   │   ├── index.js               # Esportazione centralizzata modelli
+│   │   └── PDFJob.js              # Modello job PDF
+│   ├── routes/                    # Route API Express
+│   ├── config/                    # File di configurazione
+│   │   └── database.js            # Configurazione MongoDB
+│   ├── pdfs/                      # Storage locale PDF generati
+│   ├── .dockerignore              # File ignorati da Docker
+│   ├── Dockerfile                 # Configurazione container
+│   ├── package.json               # Dipendenze Node.js
+│   └── server.js                  # Server Express principale
+├── pdfs/                          # Storage esterno PDF generati
+├── docker-compose.yml             # Orchestrazione Docker Compose
+├── .gitignore                     # File ignorati da Git
+└── README.md                      # Questo file
 ```
 
 ## 🛠️ Tecnologie
 
 - **Backend**: Node.js con Express e Worker Threads
 - **Frontend**: JavaScript vanilla (ES6 modules)
+- **UI Framework**: Bootstrap 5 (versione compilata via CDN)
 - **Database**: MongoDB (NoSQL) per gestione code job
 - **Containerizzazione**: Docker e Docker Compose
 - **PDF Generation**: PDFKit library
