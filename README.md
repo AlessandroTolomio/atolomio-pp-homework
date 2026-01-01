@@ -65,8 +65,7 @@ Il layout segue il pattern mostrato nel file [`demo`](app/demo_spiral.pdf), che 
 - Direzioni di crescita: TOP → LEFT → BOTTOM → RIGHT
 - Separatori: linee tratteggiate per delimitare le sezioni
 - Font: Courier per mantenere allineamento monospace
-
-**Soluzione implementata in:** `app/services/spiralGenerator.js` nel metodo `generateSpiral()`
+- **Soluzione implementata in:** `app/services/spiralGenerator.js` nel metodo `generateSpiral()`
 
 ## 📁 Struttura del Progetto
 
