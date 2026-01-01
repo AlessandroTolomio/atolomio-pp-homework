@@ -168,6 +168,8 @@ Quando l'utente richiede un PDF, API Gateway inoltra la richiesta a una Lambda c
 
 Lambda worker leggono dalla coda SQS, generano i PDF e li salvano in S3, aggiornando lo stato in DynamoDB. Il frontend può interrogare periodicamente DynamoDB tramite la prima Lambda o una dedicata per verificare il completamento e ottenere il link di download tramite URL firmato.
 
+**Ottimizzazione Performance**: Per ridurre il carico su DynamoDB durante il polling dello stato job, si potrebbe implementare **Redis ElastiCache** come layer di cache con TTL dinamico basato sullo stato del job.
+
 *Nota: Il polling può essere sostituito con tecniche come WebSocket, ma per questo tipo di attività dovrebbe essere sufficiente senza overenginerizzare.*
 
 ### 🔐 Add-on Sicurezza
