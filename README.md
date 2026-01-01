@@ -26,6 +26,14 @@ Nonostante Node.js sia single-threaded con I/O multi-thread, ho implementato **W
 
 ## 📋 Task Completati
 
+### Architettura
+
+L'applicazione utilizza un'architettura containerizzata con:
+- **App Container:** Node.js + Express per API e frontend
+- **MongoDB Container:** Database per gestione coda job PDF
+- **Worker Threads:** Parallelismo per generazione PDF CPU-intensiva
+- **File System:** Storage locale per PDF generati
+
 ### Task 1: Cleaning - Rimozione Parentesi e Coppie di Lettere
 
 #### 1.1 Pagina Brackets (`/brackets`)
@@ -57,16 +65,8 @@ Il layout segue il pattern mostrato nel file [`demo`](app/demo_spiral.pdf), che 
 - Direzioni di crescita: TOP → LEFT → BOTTOM → RIGHT
 - Separatori: linee tratteggiate per delimitare le sezioni
 - Font: Courier per mantenere allineamento monospace
-- **Soluzione implementata in:** `app/services/spiralGenerator.js` nel metodo `generateSpiral()`
 
-### Task 3: Architettura
-
-#### 3.1 Architettura Attuale (Docker)
-L'applicazione utilizza un'architettura containerizzata con:
-- **App Container:** Node.js + Express per API e frontend
-- **MongoDB Container:** Database per gestione coda job PDF
-- **Worker Threads:** Parallelismo per generazione PDF CPU-intensiva
-- **File System:** Storage locale per PDF generati
+**Soluzione implementata in:** `app/services/spiralGenerator.js` nel metodo `generateSpiral()`
 
 ## 📁 Struttura del Progetto
 
