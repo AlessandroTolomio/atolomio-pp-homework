@@ -134,7 +134,7 @@ docker-compose exec app npm start
 docker-compose down
 ```
 
-## Debug & Monitoraggio
+## 🔍 Debug & Monitoraggio
 - `GET /api/debug/jobs` - Tutti i job con tempi di elaborazione
 - `GET /health` - Health check
 
@@ -163,7 +163,7 @@ Amazon SQS gestirebbe la coda di elaborazione per disaccoppiare richieste e proc
 
 DynamoDB servirebbe per il tracking dei job e le referenze ai PDF generati.
 
-### 🔄 Generazione PDF
+### 📄 Generazione PDF
 
 Quando l'utente richiede un PDF, API Gateway inoltra la richiesta a una Lambda che registra il job in SQS e DynamoDB, restituendo un ID univoco al frontend.
 
