@@ -178,3 +178,7 @@ JWT per l'autenticazione API, Amazon Cognito per la gestione utenti completa.
 ### 📈 Vantaggi Scalabilità
 
 Auto-scaling automatico delle Lambda, costi pay-per-use proporzionali all'utilizzo, e zero maintenance dell'infrastruttura.
+
+---
+
+Made with ❤️ by [Alessandro Tolomio](https://www.linkedin.com/in/alessandro-tolomio-3b443063/)
