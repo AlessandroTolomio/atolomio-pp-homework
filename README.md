@@ -29,7 +29,7 @@ Nonostante Node.js sia single-threaded con I/O multi-thread, ho implementato **W
 ### Task 1: Cleaning - Rimozione Parentesi e Coppie di Lettere
 
 #### 1.1 Pagina Brackets (`/brackets`)
-Implementata una pagina web che permette all'utente di inserire multiple stringhe (una per riga) e rimuovere tutte le parentesi tonde esterne corrispondenti.
+Implementata una pagina web che permette all'utente di inserire stringhe e rimuoverne tutte le parentesi tonde esterne corrispondenti.
 
 **Implementazione:** Algoritmo iterativo che rimuove solo le parentesi esterne bilanciate, preservando quelle interne o non bilanciate.
 - **Soluzione implementata in:** `app/public/js/brackets.js` nella funzione `normalizeBrackets()`
