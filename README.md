@@ -32,11 +32,13 @@ Nonostante Node.js sia single-threaded con I/O multi-thread, ho implementato **W
 Implementata una pagina web che permette all'utente di inserire multiple stringhe (una per riga) e rimuovere tutte le parentesi tonde esterne corrispondenti.
 
 **Implementazione:** Algoritmo iterativo che rimuove solo le parentesi esterne bilanciate, preservando quelle interne o non bilanciate.
+- **Soluzione implementata in:** `app/public/js/brackets.js` nella funzione `normalizeBrackets()`
 
 #### 1.2 Pagina Pairs-EN (`/pairs-en`) - Bonus Point
 Implementata la funzionalità bonus per rimuovere coppie di lettere inglesi esterne.
 
 **Implementazione:** Algoritmo iterativo che utilizza una mappa per le coppie di lettere, garantendo performance ottimali con lookup O(1). Un'alternativa con regex sarebbe stata possibile ma meno performante.
+- **Soluzione implementata in:** `app/public/js/pairs-en.js` nella funzione `normalizePairsEN()`
 
 ### Task 2: Generazione PDF con Layout a Spirale
 
@@ -55,6 +57,7 @@ Il layout segue il pattern mostrato nel file [`demo`](app/demo_spiral.pdf), che 
 - Direzioni di crescita: TOP → LEFT → BOTTOM → RIGHT
 - Separatori: linee tratteggiate per delimitare le sezioni
 - Font: Courier per mantenere allineamento monospace
+- **Soluzione implementata in:** `app/services/spiralGenerator.js` nel metodo `generateSpiral()`
 
 ### Task 3: Architettura
 
@@ -141,39 +144,37 @@ docker-compose down
 
 ## ☁️ Migrazione al Cloud
 
-Per la migrazione al cloud e la gestione di migliaia di utenti in modo scalabile, la soluzione ideale utilizza l'ecosistema **AWS** con architettura serverless.
+Per la migrazione al cloud e la gestione di migliaia di utenti in modo scalabile, la soluzione proposta utilizza l'ecosistema **AWS** con architettura serverless.
 
 ![Architettura AWS](app/architecture.png)
 *Diagramma dell'architettura cloud sviluppato con Excalidraw*
 
 ### 🌐 Frontend (Client-Side)
-- **S3 Static Website:** Hosting del frontend come sito web statico
-- **CloudFront:** CDN globale per caching e performance multinodo
-- **WAF:** Protezione da bot e possibili attacchi DDoS/SQL injection
 
-Questa configurazione copre già completamente gli esercizi della **prima consegna** (brackets e pairs-en) che vengono eseguiti interamente dal client.
+Nella proposta di migrazione cloud, il frontend verrebbe ospitato su S3 come sito web statico e distribuito tramite CloudFront per performance globali. AWS WAF proteggerebbe da attacchi comuni del OWASP Top 10 come DDoS e SQL injection.
 
-### ⚡ Backend (Server-Side) 
-- **API Gateway:** Endpoint REST protetti da WAF per le richieste PDF
-- **Lambda Functions:** Generazione PDF serverless
-- **SQS:** Coda asincrona per gestire le richieste di generazione PDF
-- **S3 Private Bucket:** Storage sicuro per i PDF generati (senza accesso pubblico)
-- **DynamoDB:** Tracking delle richieste per supportare long polling del frontend
+Questa parte coprirebbe completamente i primi due task (brackets e pairs-en): essendo operazioni di manipolazione stringhe che non richiedono elaborazione server-side, verrebbero eseguite interamente nel browser, sfruttando la potenza di calcolo del client e riducendo i costi operativi.
 
-### 🔄 Flusso Asincrono
-1. Frontend invia richiesta PDF → API Gateway
-2. Lambda registra job in SQS e DynamoDB
-3. Lambda worker legge da SQS in modo asincrono
-4. PDF generato e salvato in S3 privato
-5. Frontend effettua long polling su DynamoDB per stato job
-6. Download PDF tramite URL firmato temporaneo
+### ⚡ Backend (Server-Side)
+
+Il backend utilizzerebbe AWS Lambda per la generazione PDF serverless, con API Gateway come punto di ingresso protetto da WAF. 
+
+Amazon SQS gestirebbe la coda di elaborazione per disaccoppiare richieste e processing. I PDF verrebbero salvati in un bucket S3 privato, accessibili solo tramite URL firmati temporanei.
+
+DynamoDB servirebbe per il tracking dei job e le referenze ai PDF generati.
+
+### 🔄 Generazione PDF
+
+Quando l'utente richiede un PDF, API Gateway inoltra la richiesta a una Lambda che registra il job in SQS e DynamoDB, restituendo un ID univoco al frontend.
+
+Lambda worker leggono dalla coda SQS, generano i PDF e li salvano in S3, aggiornando lo stato in DynamoDB. Il frontend può interrogare periodicamente DynamoDB tramite la prima Lambda o una dedicata per verificare il completamento e ottenere il link di download tramite URL firmato.
+
+*Nota: Il polling può essere sostituito con tecniche come WebSocket, ma per questo tipo di attività dovrebbe essere sufficiente senza overenginerizzare.*
 
 ### 🔐 Add-on Sicurezza
-- **JWT Authentication:** Controllo accessi alle API
-- **Amazon Cognito:** Sistema di autenticazione completo per il sito web
-- **IAM Roles:** Controllo granulare dei permessi AWS
+
+JWT per l'autenticazione API, Amazon Cognito per la gestione utenti completa.
 
 ### 📈 Vantaggi Scalabilità
-- **Auto-scaling:** Lambda gestisce automaticamente migliaia di richieste simultanee
-- **Pay-per-use:** Costi proporzionali all'utilizzo effettivo
-- **Zero maintenance:** Nessuna gestione server o infrastruttura
+
+Auto-scaling automatico delle Lambda, costi pay-per-use proporzionali all'utilizzo, e zero maintenance dell'infrastruttura.
