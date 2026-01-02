@@ -24,8 +24,6 @@ Nonostante Node.js sia single-threaded con I/O multi-thread, ho implementato **W
 - Generazione PDF non bloccante
 - Possibilità di elaborare più PDF simultaneamente
 
-## 📋 Task Completati
-
 ### Architettura
 
 L'applicazione utilizza un'architettura containerizzata con:
@@ -33,6 +31,8 @@ L'applicazione utilizza un'architettura containerizzata con:
 - **MongoDB Container:** Database per gestione coda job PDF
 - **Worker Threads:** Parallelismo per generazione PDF CPU-intensiva
 - **File System:** Storage locale per PDF generati
+
+## 📋 Task Completati
 
 ### Task 1: Cleaning - Rimozione Parentesi e Coppie di Lettere
 
