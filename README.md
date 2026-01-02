@@ -139,7 +139,7 @@ docker-compose down
 
 ## 🔧 Test e Validazione (nice to have)
 
-- **Test automatici:** Implementazione di test unitari per validare le funzioni di pulizia stringhe e generazione spirale (nice to have per garantire robustezza del codice)
+**Test automatici:** Implementazione di test unitari per validare le funzioni di pulizia stringhe e generazione spirale (nice to have per garantire robustezza del codice)
 
 ## ☁️ Migrazione al Cloud
 
@@ -168,7 +168,7 @@ Quando l'utente richiede un PDF, API Gateway inoltra la richiesta a una Lambda c
 
 Lambda worker leggono dalla coda SQS, generano i PDF e li salvano in S3, aggiornando lo stato in DynamoDB. Il frontend può interrogare periodicamente DynamoDB tramite la prima Lambda o una dedicata per verificare il completamento e ottenere il link di download tramite URL firmato.
 
-**Ottimizzazione Performance**: Per ridurre il carico su DynamoDB durante il polling dello stato job, si potrebbe implementare **Redis ElastiCache** come layer di cache con TTL dinamico basato sullo stato del job.
+Per ridurre il carico su DynamoDB durante il polling dello stato job, si potrebbe implementare **Redis ElastiCache** come layer di cache con TTL dinamico basato sullo stato del job.
 
 *Nota: Il polling può essere sostituito con tecniche come WebSocket, ma per questo tipo di attività dovrebbe essere sufficiente senza overenginerizzare.*
 
@@ -179,6 +179,12 @@ JWT per l'autenticazione API, Amazon Cognito per la gestione utenti completa.
 ### 📈 Vantaggi Scalabilità
 
 Auto-scaling automatico delle Lambda, costi pay-per-use proporzionali all'utilizzo, e zero maintenance dell'infrastruttura.
+
+### 📊 Osservabilità e Monitoraggio
+
+L'architettura cloud integrerebbe **Amazon CloudWatch** per monitoraggio completo: metriche Lambda (durata, errori, cold start), code SQS, analytics WAF, e allarmi proattivi via SNS per garantire interventi tempestivi e ottimizzazione delle risorse.
+
+**Gestione Storage**: I PDF in S3 potrebbero utilizzare **Lifecycle Policies** per transizione automatica verso **S3 Glacier** dopo un periodo definito, ottimizzando i costi di storage per file raramente acceduti con tempi di retrieval più lunghi.
 
 ---
 
